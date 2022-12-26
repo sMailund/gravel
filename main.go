@@ -3,14 +3,16 @@ package main
 import (
 	"fmt"
 	"grvl/command"
+	"grvl/linksCommand"
+	"grvl/searchCommand"
 	"os"
 	"strings"
 )
 
 var commands = []command.Command{
 	&UsageCommand{},
-	&LinksCommand{},
-	&SearchCommand{},
+	&linksCommand.LinksCommand{},
+	&searchCommand.SearchCommand{},
 }
 
 func main() {
