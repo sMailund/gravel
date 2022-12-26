@@ -17,12 +17,15 @@ func main() {
 		return
 	}
 
+	cmd := getCommand(args)
+	cmd.execute()
+}
+
+func getCommand(args []string) command {
 	if strings.Compare(args[0], "-s") == 0 {
-		cmd := SearchCommand{searchTerm: args[1]}
-		cmd.execute()
+		return &SearchCommand{searchTerm: args[1]}
 	} else {
-		cmd := UsageCommand{}
-		cmd.execute()
+		return &UsageCommand{}
 	}
 }
 
