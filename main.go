@@ -35,11 +35,6 @@ func getCommand(args []string) Command {
 	return &UsageCommand{}
 }
 
-type match struct {
-	text       string
-	lineNumber int
-}
-
 type UsageCommand struct {
 }
 

@@ -85,3 +85,8 @@ func printMatches(fileInfo os.FileInfo, matches []match) {
 		fmt.Println()
 	}
 }
+
+type match struct {
+	text       string
+	lineNumber int
+}
