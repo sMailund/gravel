@@ -9,9 +9,10 @@ import (
 	"strings"
 )
 
-func SearchAllFiles(term string) {
+func SearchAllFiles(term string, printer ResultPrinter) {
 	e := filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
-		searchFile(path, term)
+		matches := searchFile(path, term)
+		printer.print(info, matches)
 		return nil
 	})
 	if e != nil {
@@ -19,7 +20,7 @@ func SearchAllFiles(term string) {
 	}
 }
 
-func searchFile(path string, term string) {
+func searchFile(path string, term string) []match {
 	f, err := os.Open(path)
 	if err != nil {
 		panic("")
@@ -32,7 +33,7 @@ func searchFile(path string, term string) {
 	}
 
 	if fileInfo.IsDir() {
-		return
+		return nil
 	}
 
 	scanner := bufio.NewScanner(f)
@@ -53,7 +54,7 @@ func searchFile(path string, term string) {
 		line++
 	}
 
-	printMatches(fileInfo, matches)
+	return matches
 }
 
 func printMatches(fileInfo os.FileInfo, matches []match) {

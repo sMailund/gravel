@@ -22,5 +22,5 @@ func (c *SearchCommand) Description() string {
 }
 
 func (c *SearchCommand) Execute() {
-	search.SearchAllFiles(c.searchTerm)
+	search.SearchAllFiles(c.searchTerm, search.FileAndContentPrinter{})
 }
