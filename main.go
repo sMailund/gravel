@@ -44,15 +44,23 @@ func searchFile(path string, term string) {
 	// Splits on newlines by default.
 	scanner := bufio.NewScanner(f)
 
+	matches := []string{}
+
 	line := 1
 	// https://golang.org/pkg/bufio/#Scanner.Scan
 	for scanner.Scan() {
 		text := scanner.Text()
 		if strings.Contains(text, term) {
-			println(text)
+			matches = append(matches, text)
 		}
 
 		line++
+	}
+
+	if len(matches) > 0 {
+		for _, match := range matches {
+			println(match)
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
