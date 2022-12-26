@@ -73,9 +73,11 @@ func searchFile(path string, term string) {
 	}
 
 	if len(matches) > 0 {
+		fmt.Printf("%v\n", fileInfo.Name())
 		for _, match := range matches {
 			fmt.Printf("%v -> %v\n", match.lineNumber, match.text)
 		}
+		fmt.Println()
 	}
 
 	if err := scanner.Err(); err != nil {
