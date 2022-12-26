@@ -138,11 +138,16 @@ type match struct {
 
 type command interface {
 	execute()
+	flag() string
 	description() string
 }
 
 type SearchCommand struct {
 	searchTerm string
+}
+
+func (c *SearchCommand) flag() string {
+	return "-s"
 }
 
 func (c *SearchCommand) description() string {
@@ -156,16 +161,28 @@ func (c *SearchCommand) execute() {
 type UsageCommand struct {
 }
 
+func (c *UsageCommand) flag() string {
+	return "?"
+}
+
 func (c *UsageCommand) description() string {
 	return "show list of commands"
 }
 
 func (c *UsageCommand) execute() {
-	println("unrecognized command")
+	fmt.Println("gravel - local-only obsidian alternative for the command line")
+
+	for _, command := range commands {
+		fmt.Printf("\t%v\n", command.description())
+	}
 }
 
 type LinksCommand struct {
 	path string
+}
+
+func (c *LinksCommand) flag() string {
+	return "-l"
 }
 
 func (c *LinksCommand) description() string {
