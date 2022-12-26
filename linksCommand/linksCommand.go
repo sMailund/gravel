@@ -51,7 +51,7 @@ func findLinks(path string) {
 	links = removeDuplicateStr(links)
 
 	for _, link := range links {
-		fmt.Println(link)
+		fmt.Printf("%v\n", link)
 	}
 }
 
