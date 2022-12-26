@@ -72,10 +72,10 @@ func searchFile(path string, term string) {
 		line++
 	}
 
-	printMatches(matches, fileInfo)
+	printMatches(fileInfo, matches)
 }
 
-func printMatches(matches []match, fileInfo os.FileInfo) {
+func printMatches(fileInfo os.FileInfo, matches []match) {
 	if len(matches) > 0 {
 		fmt.Printf("%v\n", fileInfo.Name())
 		for _, match := range matches {
