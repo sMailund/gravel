@@ -23,14 +23,14 @@ func (c *SearchCommand) Flag() string {
 }
 
 func (c *SearchCommand) Description() string {
-	return "search for a file containing search term"
+	return "SearchAllFiles for a file containing SearchAllFiles term"
 }
 
 func (c *SearchCommand) Execute() {
-	search(c.searchTerm)
+	SearchAllFiles(c.searchTerm)
 }
 
-func search(term string) {
+func SearchAllFiles(term string) {
 	e := filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
 		searchFile(path, term)
 		return nil
