@@ -25,11 +25,14 @@ func main() {
 
 func getCommand(args []string) command {
 	if len(args) == 0 {
-		return &UsageCommand{}
+		usageCommand := UsageCommand{}
+		return usageCommand.create(args)
 	} else if strings.Compare(args[0], "-s") == 0 {
-		return &SearchCommand{searchTerm: args[1]}
+		cmd := &SearchCommand{searchTerm: args[1]}
+		return cmd.create(args)
 	} else if strings.Compare(args[0], "-l") == 0 {
-		return &LinksCommand{path: args[1]}
+		cmd := &LinksCommand{path: args[1]}
+		return cmd.create(args)
 	} else {
 		return &UsageCommand{}
 	}
@@ -137,6 +140,7 @@ type match struct {
 }
 
 type command interface {
+	create(args []string) command
 	execute()
 	flag() string
 	description() string
@@ -144,6 +148,10 @@ type command interface {
 
 type SearchCommand struct {
 	searchTerm string
+}
+
+func (c *SearchCommand) create(args []string) command {
+	return &SearchCommand{searchTerm: args[1]}
 }
 
 func (c *SearchCommand) flag() string {
@@ -159,6 +167,10 @@ func (c *SearchCommand) execute() {
 }
 
 type UsageCommand struct {
+}
+
+func (c *UsageCommand) create(args []string) command {
+	return &UsageCommand{}
 }
 
 func (c *UsageCommand) flag() string {
@@ -179,6 +191,10 @@ func (c *UsageCommand) execute() {
 
 type LinksCommand struct {
 	path string
+}
+
+func (c *LinksCommand) create(args []string) command {
+	return &LinksCommand{path: args[1]}
 }
 
 func (c *LinksCommand) flag() string {
