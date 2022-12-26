@@ -21,6 +21,8 @@ func getCommand(args []string) command {
 		return &UsageCommand{}
 	} else if strings.Compare(args[0], "-s") == 0 {
 		return &SearchCommand{searchTerm: args[1]}
+	} else if strings.Compare(args[0], "-l") == 0 {
+		return &LinksCommand{path: args[1]}
 	} else {
 		return &UsageCommand{}
 	}
@@ -105,4 +107,12 @@ type UsageCommand struct {
 
 func (c *UsageCommand) execute() {
 	println("unrecognized command")
+}
+
+type LinksCommand struct {
+	path string
+}
+
+func (c *LinksCommand) execute() {
+	println(c.path)
 }
