@@ -140,13 +140,6 @@ type match struct {
 	lineNumber int
 }
 
-type Command interface {
-	create(args []string) Command
-	execute()
-	flag() string
-	description() string
-}
-
 type SearchCommand struct {
 	searchTerm string
 }
