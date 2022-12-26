@@ -27,15 +27,16 @@ func getCommand(args []string) command {
 	if len(args) == 0 {
 		usageCommand := UsageCommand{}
 		return usageCommand.create(args)
-	} else if strings.Compare(args[0], "-s") == 0 {
-		cmd := &SearchCommand{searchTerm: args[1]}
-		return cmd.create(args)
-	} else if strings.Compare(args[0], "-l") == 0 {
-		cmd := &LinksCommand{path: args[1]}
-		return cmd.create(args)
-	} else {
-		return &UsageCommand{}
 	}
+
+	flag := args[0]
+	for _, cmd := range commands {
+		if strings.Compare(flag, cmd.flag()) == 0 {
+			return cmd.create(args)
+		}
+	}
+
+	return &UsageCommand{}
 }
 
 func search(term string) {
