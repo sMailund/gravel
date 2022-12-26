@@ -47,8 +47,9 @@ func searchFile(path string, term string) {
 	line := 1
 	// https://golang.org/pkg/bufio/#Scanner.Scan
 	for scanner.Scan() {
-		if strings.Contains(scanner.Text(), term) {
-			println(line)
+		text := scanner.Text()
+		if strings.Contains(text, term) {
+			println(text)
 		}
 
 		line++
