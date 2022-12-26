@@ -18,7 +18,8 @@ func main() {
 	}
 
 	if strings.Compare(args[0], "-s") == 0 {
-		search(args[1])
+		cmd := SearchCommand{searchTerm: args[1]}
+		cmd.execute()
 	} else {
 		usage()
 	}
@@ -88,4 +89,16 @@ func printMatches(fileInfo os.FileInfo, matches []match) {
 type match struct {
 	text       string
 	lineNumber int
+}
+
+type command interface {
+	execute()
+}
+
+type SearchCommand struct {
+	searchTerm string
+}
+
+func (c *SearchCommand) execute() {
+	search(c.searchTerm)
 }
