@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -10,7 +9,6 @@ import (
 )
 
 func main() {
-	fmt.Printf("hello world")
 	args := os.Args[1:]
 	if strings.Compare(args[0], "-s") == 0 {
 		search(args[1])
@@ -19,7 +17,7 @@ func main() {
 
 func search(term string) {
 	e := filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
-		searchFile(path)
+		searchFile(path, term)
 		return nil
 	})
 	if e != nil {
@@ -27,7 +25,7 @@ func search(term string) {
 	}
 }
 
-func searchFile(path string) {
+func searchFile(path string, term string) {
 	f, err := os.Open(path)
 	if err != nil {
 		panic("")
@@ -49,7 +47,7 @@ func searchFile(path string) {
 	line := 1
 	// https://golang.org/pkg/bufio/#Scanner.Scan
 	for scanner.Scan() {
-		if strings.Contains(scanner.Text(), "yourstring") {
+		if strings.Contains(scanner.Text(), term) {
 			println(line)
 		}
 
