@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"grvl/command"
+	"grvl/search"
 	"os"
 	"regexp"
 )
@@ -69,7 +70,7 @@ func findLinks(path string) {
 
 	selected := links[selection]
 
-	fmt.Println(selected)
+	search.SearchAllFiles(selected, search.FileNamePrinter{})
 }
 
 func removeDuplicateStr(strSlice []string) []string {
