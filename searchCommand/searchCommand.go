@@ -18,7 +18,7 @@ func (c *SearchCommand) Flag() string {
 }
 
 func (c *SearchCommand) Description() string {
-	return "SearchAllFiles for a file containing SearchAllFiles term"
+	return "search all files for a file containing search term"
 }
 
 func (c *SearchCommand) Execute() {
