@@ -9,6 +9,10 @@ type SearchCommand struct {
 	searchTerm string
 }
 
+func (c *SearchCommand) Keyword() string {
+	return "search"
+}
+
 func (c *SearchCommand) Create(args []string) command.Command {
 	return &SearchCommand{searchTerm: args[1]}
 }

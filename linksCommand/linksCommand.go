@@ -13,6 +13,10 @@ type LinksCommand struct {
 	path string
 }
 
+func (c *LinksCommand) Keyword() string {
+	return "links"
+}
+
 func (c *LinksCommand) Create(args []string) command.Command {
 	return &LinksCommand{path: args[1]}
 }

@@ -41,6 +41,10 @@ func getCommand(args []string) command.Command {
 type UsageCommand struct {
 }
 
+func (c *UsageCommand) Keyword() string {
+	return "usage"
+}
+
 func (c *UsageCommand) Create(args []string) command.Command {
 	return &UsageCommand{}
 }
