@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"grvl/command"
 	"log"
 	"os"
 	"path/filepath"
@@ -13,19 +14,19 @@ type SearchCommand struct {
 	searchTerm string
 }
 
-func (c *SearchCommand) create(args []string) Command {
+func (c *SearchCommand) Create(args []string) command.Command {
 	return &SearchCommand{searchTerm: args[1]}
 }
 
-func (c *SearchCommand) flag() string {
+func (c *SearchCommand) Flag() string {
 	return "-s"
 }
 
-func (c *SearchCommand) description() string {
+func (c *SearchCommand) Description() string {
 	return "search for a file containing search term"
 }
 
-func (c *SearchCommand) execute() {
+func (c *SearchCommand) Execute() {
 	search(c.searchTerm)
 }
 

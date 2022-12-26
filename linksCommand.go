@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"grvl/command"
 	"os"
 	"regexp"
 )
@@ -11,19 +12,19 @@ type LinksCommand struct {
 	path string
 }
 
-func (c *LinksCommand) create(args []string) Command {
+func (c *LinksCommand) Create(args []string) command.Command {
 	return &LinksCommand{path: args[1]}
 }
 
-func (c *LinksCommand) flag() string {
+func (c *LinksCommand) Flag() string {
 	return "-l"
 }
 
-func (c *LinksCommand) description() string {
+func (c *LinksCommand) Description() string {
 	return "show all links in given file"
 }
 
-func (c *LinksCommand) execute() {
+func (c *LinksCommand) Execute() {
 	findLinks(c.path)
 }
 
