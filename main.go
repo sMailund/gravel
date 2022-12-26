@@ -13,7 +13,7 @@ func main() {
 	args := os.Args[1:]
 
 	if len(args) == 0 {
-		usage()
+		println("unrecognized command")
 		return
 	}
 
@@ -21,12 +21,9 @@ func main() {
 		cmd := SearchCommand{searchTerm: args[1]}
 		cmd.execute()
 	} else {
-		usage()
+		cmd := UsageCommand{}
+		cmd.execute()
 	}
-}
-
-func usage() {
-	println("unrecognized command")
 }
 
 func search(term string) {
@@ -101,4 +98,11 @@ type SearchCommand struct {
 
 func (c *SearchCommand) execute() {
 	search(c.searchTerm)
+}
+
+type UsageCommand struct {
+}
+
+func (c *UsageCommand) execute() {
+	println("unrecognized command")
 }
