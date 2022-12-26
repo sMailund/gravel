@@ -12,17 +12,14 @@ import (
 func main() {
 	args := os.Args[1:]
 
-	if len(args) == 0 {
-		println("unrecognized command")
-		return
-	}
-
 	cmd := getCommand(args)
 	cmd.execute()
 }
 
 func getCommand(args []string) command {
-	if strings.Compare(args[0], "-s") == 0 {
+	if len(args) == 0 {
+		return &UsageCommand{}
+	} else if strings.Compare(args[0], "-s") == 0 {
 		return &SearchCommand{searchTerm: args[1]}
 	} else {
 		return &UsageCommand{}
