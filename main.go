@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var commands = []command{
+var commands = []Command{
 	&UsageCommand{},
 	&LinksCommand{},
 	&SearchCommand{},
@@ -23,7 +23,7 @@ func main() {
 	cmd.execute()
 }
 
-func getCommand(args []string) command {
+func getCommand(args []string) Command {
 	if len(args) == 0 {
 		usageCommand := UsageCommand{}
 		return usageCommand.create(args)
@@ -140,8 +140,8 @@ type match struct {
 	lineNumber int
 }
 
-type command interface {
-	create(args []string) command
+type Command interface {
+	create(args []string) Command
 	execute()
 	flag() string
 	description() string
@@ -151,7 +151,7 @@ type SearchCommand struct {
 	searchTerm string
 }
 
-func (c *SearchCommand) create(args []string) command {
+func (c *SearchCommand) create(args []string) Command {
 	return &SearchCommand{searchTerm: args[1]}
 }
 
@@ -170,7 +170,7 @@ func (c *SearchCommand) execute() {
 type UsageCommand struct {
 }
 
-func (c *UsageCommand) create(args []string) command {
+func (c *UsageCommand) create(args []string) Command {
 	return &UsageCommand{}
 }
 
@@ -183,7 +183,7 @@ func (c *UsageCommand) description() string {
 }
 
 func (c *UsageCommand) execute() {
-	fmt.Println("gravel - local-only obsidian alternative for the command line")
+	fmt.Println("gravel - local-only obsidian alternative for the Command line")
 
 	for _, command := range commands {
 		fmt.Printf("\t%v %v\n", command.flag(), command.description())
@@ -194,7 +194,7 @@ type LinksCommand struct {
 	path string
 }
 
-func (c *LinksCommand) create(args []string) command {
+func (c *LinksCommand) create(args []string) Command {
 	return &LinksCommand{path: args[1]}
 }
 
