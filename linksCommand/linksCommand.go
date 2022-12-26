@@ -53,6 +53,23 @@ func findLinks(path string) {
 	for i, link := range links {
 		fmt.Printf("%v -> %v\n", i, link)
 	}
+
+	var selection int
+	_, err = fmt.Scanf("%d", &selection)
+
+	if err != nil {
+		fmt.Println("could not read input.")
+		return
+	}
+
+	if selection < 0 || selection > len(links)-1 {
+		fmt.Println("out of range")
+		return
+	}
+
+	selected := links[selection]
+
+	fmt.Println(selected)
 }
 
 func removeDuplicateStr(strSlice []string) []string {
