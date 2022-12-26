@@ -61,6 +61,6 @@ func (c *UsageCommand) Execute() {
 	fmt.Println("gravel - local-only obsidian alternative for the Command line")
 
 	for _, command := range commands {
-		fmt.Printf("\t%v %v\n", command.Flag(), command.Description())
+		fmt.Printf("\t%v, %v \t-> %v\n", command.Keyword(), command.Flag(), command.Description())
 	}
 }
