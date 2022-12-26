@@ -10,9 +10,21 @@ import (
 
 func main() {
 	args := os.Args[1:]
+
+	if len(args) == 0 {
+		usage()
+		return
+	}
+
 	if strings.Compare(args[0], "-s") == 0 {
 		search(args[1])
+	} else {
+		usage()
 	}
+}
+
+func usage() {
+	println("unrecognized command")
 }
 
 func search(term string) {
