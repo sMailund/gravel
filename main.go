@@ -132,10 +132,15 @@ type match struct {
 
 type command interface {
 	execute()
+	description() string
 }
 
 type SearchCommand struct {
 	searchTerm string
+}
+
+func (c *SearchCommand) description() string {
+	return "search for a file containing search term"
 }
 
 func (c *SearchCommand) execute() {
@@ -145,12 +150,20 @@ func (c *SearchCommand) execute() {
 type UsageCommand struct {
 }
 
+func (c *UsageCommand) description() string {
+	return "show list of commands"
+}
+
 func (c *UsageCommand) execute() {
 	println("unrecognized command")
 }
 
 type LinksCommand struct {
 	path string
+}
+
+func (c *LinksCommand) description() string {
+	return "show all links in given file"
 }
 
 func (c *LinksCommand) execute() {
