@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -55,13 +56,17 @@ func searchFile(path string, term string) {
 
 	scanner := bufio.NewScanner(f)
 
-	matches := []string{}
+	matches := []match{}
 
 	line := 1
 	for scanner.Scan() {
 		text := scanner.Text()
 		if strings.Contains(text, term) {
-			matches = append(matches, text)
+			match := match{
+				text:       text,
+				lineNumber: line,
+			}
+			matches = append(matches, match)
 		}
 
 		line++
@@ -69,11 +74,16 @@ func searchFile(path string, term string) {
 
 	if len(matches) > 0 {
 		for _, match := range matches {
-			println(match)
+			fmt.Printf("%v -> %v\n", match.lineNumber, match.text)
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
 		panic(err)
 	}
+}
+
+type match struct {
+	text       string
+	lineNumber int
 }
