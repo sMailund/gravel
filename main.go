@@ -28,9 +28,9 @@ func getCommand(args []string) command.Command {
 		return usageCommand.Create(args)
 	}
 
-	flag := args[0]
+	argument := args[0]
 	for _, cmd := range commands {
-		if strings.Compare(flag, cmd.Flag()) == 0 {
+		if strings.Compare(argument, cmd.Flag()) == 0 || strings.Compare(argument, cmd.Keyword()) == 0 {
 			return cmd.Create(args)
 		}
 	}
