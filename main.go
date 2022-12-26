@@ -10,6 +10,12 @@ import (
 	"strings"
 )
 
+var commands = []command{
+	&UsageCommand{},
+	&LinksCommand{},
+	&SearchCommand{},
+}
+
 func main() {
 	args := os.Args[1:]
 
